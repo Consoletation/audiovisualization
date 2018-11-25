@@ -51,49 +51,6 @@ function handleFiles(files) {
 		console.log(filename);
 
 		var url = files[0].urn || files[0].name;
-		ID3.loadTags(url, function() {
-			var tags = ID3.getAllTags(url);
-
-//                    console.log(tags.title.toString().length);
-//                    if (tags.title.length > 14) {
-//                        var newTitle = tags.title.substring(0,14);
-//                        newTitle += "...";
-//                        $("#title").html(newTitle);
-//                    }
-//                    else {
-//                        $("#title").html(tags.title);
-//                    }
-			if (tags.title.length > 14 && tags.title.length <= 17) {
-
-				$("#title").css("font-size", "7.5vh");
-				
-			}
-			if (tags.title.length > 17 && tags.title.length <= 20) {
-				
-				$("#title").css("font-size", "6.5vh");
-			}
-			
-			if (tags.title.length > 20) {
-				
-				$("#title").css("font-size", "5vh");
-				
-			}
-			
-			$("#title").html(tags.title);
-			
-			onWindowResize();
-
-			$("#title").css("visibility", "visible");
-
-			$("#artist").html(tags.artist);
-			$("#artist").css("visibility", "visible");
-			$("#album").html(tags.album);
-			$("#album").css("visibility", "visible");
-		  }, {
-			tags: ["title","artist","album","picture"],
-			dataReader: ID3.FileAPIReader(files[0])
-		  });
-		
      };
      fileReader.readAsArrayBuffer(files[0]);
      var url = URL.createObjectURL(files[0]); 
@@ -144,11 +101,7 @@ function playSample() {
  	// When loaded decode the data
 	request.onload = function() {
 		
-		$("#title").html("Infinite");
-		$("#album").html("Infinite");
-		$("#artist").html("Valence");
 		onWindowResize();
-		$("#title, #artist, #album").css("visibility", "visible");
 		
 		// decode the data
 		context.decodeAudioData(request.response, function(buffer) {
@@ -187,11 +140,7 @@ function useMic()
 		//start updating
 		rafID = window.requestAnimationFrame( updateVisualization );
 		
-		$("#title").html("Mic");
-		$("#album").html("Input");
-		$("#artist").html("Using");
 		onWindowResize();
-		$("#title, #artist, #album").css("visibility", "visible");
 		$("#freq, body").addClass("animateHue");
 	})
 	.catch(function(err) {
@@ -262,16 +211,6 @@ function onWindowResize()
 {
 	ctx.canvas.width  = window.innerWidth;
   	ctx.canvas.height = window.innerHeight;
-	
-	var containerHeight = $("#song_info_wrapper").height();
-	var topVal = $(window).height() / 2 - containerHeight / 2; 
-	$("#song_info_wrapper").css("top", topVal);
-	console.log(topVal);
-	
-	if($(window).width() <= 500) {
-		//TODO: not yet working
-		$("#title").css("font-size", "40px");
-	}
 }
 
 var audioBuffer;
