@@ -48,10 +48,6 @@ input, button, #loading {
     
 }
 
-#playSampleButton {
-	top: 40px;
-}
-
 #useMicButton {
 	top: 70px;
 }
