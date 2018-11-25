@@ -72,7 +72,6 @@ function handleFiles(files) {
 		// when the audio is decoded play the sound
 		sourceNode.buffer = buffer;
 		sourceNode.start(0);
-		$("#freq, body").addClass("animateHue");
 		//on error
 		}, function(e) {
 			console.log(e);
@@ -105,7 +104,6 @@ function useMic()
 		rafID = window.requestAnimationFrame( updateVisualization );
 		
 		onWindowResize();
-		$("#freq, body").addClass("animateHue");
 	})
 	.catch(function(err) {
 	  /* handle the error */
