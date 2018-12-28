@@ -160,7 +160,7 @@ function drawBars (array) {
 	ctx.fillStyle = "#fff";
 
 	var bass = Math.floor(array[1]); //1Hz Frequenz 
-	var radius = 0.45 * $(window).width() <= 450 ? -(bass * 0.25 + 0.45 * $(window).width()) : -(bass * 0.25 + 450);
+	var radius = 0.45 * $(window).width() <= 1500 ? -(bass * 0.25 + 0.45 * $(window).width()) : -(bass * 0.25 + 1500);
 
 	var bar_length_factor = 1;
 	if ($(window).width() >= 785) {
@@ -181,7 +181,7 @@ function drawBars (array) {
 			//draw bin
 			//ctx.fillRect(0 + i * space, c.height - value, 2 , c.height);
                         //ctx.fillRect(i * space, c.height, 2, -value);
-                        ctx.fillRect(0, radius, $(window).width() <= 450 ? 2 : 3, -value / bar_length_factor);
+                        ctx.fillRect(0, radius, $(window).width() <= 1500 ? 2 : 3, -value / bar_length_factor);
                         ctx.rotate((180 / 128) * Math.PI/180);   
 		}
 	}  
@@ -195,7 +195,7 @@ function drawBars (array) {
 			//ctx.fillRect(0 + i * space, c.height - value, 2 , c.height);
 						//ctx.fillRect(i * space, c.height, 2, -value);
 						ctx.rotate(-(180 / 128) * Math.PI/180);
-						ctx.fillRect(0, radius, $(window).width() <= 450 ? 2 : 3, -value / bar_length_factor);
+						ctx.fillRect(0, radius, $(window).width() <= 1500 ? 2 : 3, -value / bar_length_factor);
 		}
 	} 
         
@@ -208,7 +208,7 @@ function drawBars (array) {
 			//ctx.fillRect(0 + i * space, c.height - value, 2 , c.height);
 						//ctx.fillRect(i * space, c.height, 2, -value);
 						ctx.rotate((180 / 128) * Math.PI/180);
-						ctx.fillRect(0, radius, $(window).width() <= 450 ? 2 : 3, -value / bar_length_factor);
+						ctx.fillRect(0, radius, $(window).width() <= 1500 ? 2 : 3, -value / bar_length_factor);
 		}
 	} 
     
