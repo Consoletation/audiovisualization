@@ -34,54 +34,6 @@ $(function () {
 	    initBinCanvas();	
 });
 
-function handleFiles(files) {
-    if(files.length === 0){
-        return;
-    }
-	fileChosen = true;
-    setupAudioNodes();
-	var fileReader  = new FileReader();
-    fileReader.onload = function(){
-         var arrayBuffer = this.result;
-         console.log(arrayBuffer);
-         console.log(arrayBuffer.byteLength);
-		
-		 filename = files[0].name.toString();
-		filename = filename.slice(0, -4);
-		console.log(filename);
-
-		var url = files[0].urn || files[0].name;
-     };
-     fileReader.readAsArrayBuffer(files[0]);
-     var url = URL.createObjectURL(files[0]); 
-	
-	var request = new XMLHttpRequest();
-	
-	request.addEventListener("progress", updateProgress);
-	request.addEventListener("load", transferComplete);
-	request.addEventListener("error", transferFailed);
-	request.addEventListener("abort", transferCanceled);
-	
-	request.open('GET', url, true);
-	request.responseType = 'arraybuffer';
-
- 	// When loaded decode the data
-	request.onload = function() {
-		// decode the data
-		context.decodeAudioData(request.response, function(buffer) {
-		// when the audio is decoded play the sound
-		sourceNode.buffer = buffer;
-		sourceNode.start(0);
-		//on error
-		}, function(e) {
-			console.log(e);
-		});
-	};
-	request.send();
-	
-	$("button, input").prop("disabled",true);
-}
-
 function useMic() 	
 {
 	"use strict";
@@ -111,36 +63,6 @@ function useMic()
 		console.log('capturing microphone data failed!');
 		console.log(err);
 	});
-}
-
-// progress on transfers from the server to the client (downloads)
-function updateProgress (oEvent) {
-  if (oEvent.lengthComputable) {
-	$("button, input").prop("disabled",true);
-    var percentComplete = oEvent.loaded / oEvent.total;
-	console.log("Loading music file... " + Math.floor(percentComplete * 100) + "%");
-	$("#loading").html("Loading... " + Math.floor(percentComplete * 100) + "%");
-  } else {
-    // Unable to compute progress information since the total size is unknown
-	  console.log("Unable to compute progress info.");
-  }
-}
-
-function transferComplete(evt) {
-  	console.log("The transfer is complete.");
-	$("#loading").html("");
-	//$("button, input").prop("disabled",false);
-}
-
-function transferFailed(evt) {
-  	console.log("An error occurred while transferring the file.");
-	$("#loading").html("Loading failed.");
-	$("button, input").prop("disabled", false);
-}
-
-function transferCanceled(evt) {
-  	console.log("The transfer has been canceled by the user.");
-	$("#loading").html("Loading canceled.");
 }
 
 function initBinCanvas () {

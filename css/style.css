@@ -11,24 +11,12 @@ body {
 }
 
 input, button, #loading {
-	position: absolute;
-	top: 10px;
-	left: 5px;
+    position: absolute;
+    top: 10px;
+    left: 5px;
     display: block;
     z-index: 999;
     
-}
-
-#useMicButton {
-	top: 70px;
-}
-
-#loading {
-	display: inline-block;
-	top: 44px; 
-	left: 110px;
-	font-family: "Roboto", sans-serif; 
-	font-size: 12px;
 }
 
 html, body {
